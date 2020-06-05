@@ -9,4 +9,6 @@ import retrofit2.http.Query;
 public interface UmoriliApi {
     @GET("/api/get")
     Call<List<PostModel>> getData(@Query("name") String resourseName, @Query("num") int count);
+
+    //Call<List<PostModel>> getData();
 }

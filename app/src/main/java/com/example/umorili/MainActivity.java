@@ -40,19 +40,19 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        App.getApi().getData("base", 50).enqueue(new Callback<List<PostModel>>() {
-            @Override
-            public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
-                posts.addAll(response.body());
-                recyclerView.getAdapter().notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "No error "+posts.size(),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<List<PostModel>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "An error occurred during networking",Toast.LENGTH_SHORT).show();
-            }
-        });
+//        App.getApi().getData("base", 50).enqueue(new Callback<List<PostModel>>() {
+//            @Override
+//            public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
+//                posts.addAll(response.body());
+//                recyclerView.getAdapter().notifyDataSetChanged();
+//                Toast.makeText(MainActivity.this, "No error "+posts.size(),Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<PostModel>> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "An error occurred during networking",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 }
