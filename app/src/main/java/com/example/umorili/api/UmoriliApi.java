@@ -1,4 +1,6 @@
-package com.example.umorili;
+package com.example.umorili.Api;
+
+import com.example.umorili.PostModel;
 
 import java.util.List;
 

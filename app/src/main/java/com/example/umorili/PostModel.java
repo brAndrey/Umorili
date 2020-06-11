@@ -3,7 +3,7 @@ package com.example.umorili;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class PostModel {
+public class PostModel {
 
     @SerializedName("site")
     @Expose

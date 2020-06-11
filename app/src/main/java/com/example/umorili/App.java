@@ -2,6 +2,8 @@ package com.example.umorili;
 
 import android.app.Application;
 
+import com.example.umorili.Api.UmoriliApi;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,7 +18,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-// логизация
+
+        // логизация
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -26,7 +29,7 @@ public class App extends Application {
 
         retrofit = new Retrofit.Builder()
                 //Базовая часть адреса
-                .baseUrl("https://umorili.herokuapp.com")
+                .baseUrl(Constants.API_BASE_URI)
                 //Конвертер, необходимый для преобразования JSON'а в объекты
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
