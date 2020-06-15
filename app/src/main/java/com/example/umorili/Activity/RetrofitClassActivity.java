@@ -1,6 +1,7 @@
 package com.example.umorili.Activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,8 @@ import retrofit2.Response;
 
 public class RetrofitClassActivity extends AppCompatActivity {
 
+    private static final String LOG=RetrofitClassActivity.class.getName();
+
     RecyclerView recyclerView;
     List<PostModel> posts;
     @Override
@@ -41,12 +44,17 @@ public class RetrofitClassActivity extends AppCompatActivity {
         PostAdapter adapter = new PostAdapter( posts );
         recyclerView.setAdapter(adapter);
 
-        try {
-            //Response response = App.getApi().getData("bash", 50).execute();
-            Response response = App.getApi().getData(Constants.RESOURSENAME,Constants.COINT).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if ( App.getApi() == null) {Log.i(LOG," Облом ");
+
+        } else{ Log.i(LOG," not null ");}
+
+//        try {
+//            //Response response = App.getApi().getData("bash", 50).execute();
+//
+//            Response response = App.getApi().getData(Constants.RESOURSENAME,Constants.COINT).execute();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         App.getApi().getData(Constants.RESOURSENAME,Constants.COINT).enqueue(new Callback<List<PostModel>>() {
             @Override

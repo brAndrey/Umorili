@@ -13,7 +13,7 @@ public class App extends Application {
 
     private static UmoriliApi umoriliApi;
 
-    private Retrofit retrofit;
+    private static Retrofit retrofit;
 
     @Override
     public void onCreate() {
@@ -23,8 +23,9 @@ public class App extends Application {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder()
-                .addInterceptor(interceptor);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .build();
         // log of
 
         retrofit = new Retrofit.Builder()
@@ -32,11 +33,33 @@ public class App extends Application {
                 .baseUrl(Constants.API_BASE_URI)
                 //Конвертер, необходимый для преобразования JSON'а в объекты
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(client)
                 .build();
 
         umoriliApi = retrofit.create(UmoriliApi.class); //Создаем объект, при помощи которого будем выполнять запросы
 
     }
 
-    public static UmoriliApi getApi(){ return umoriliApi;}
+    public static UmoriliApi getApi(){
+//        if (umoriliApi == null){
+//            // логизация
+//            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//
+//            OkHttpClient.Builder client = new OkHttpClient.Builder()
+//                    .addInterceptor(interceptor);
+//            // log of
+//
+//            retrofit = new Retrofit.Builder()
+//                    //Базовая часть адреса
+//                    .baseUrl(Constants.API_BASE_URI)
+//                    //Конвертер, необходимый для преобразования JSON'а в объекты
+//                    .addConverterFactory(GsonConverterFactory.create())
+//                    .build();
+//
+//            umoriliApi = retrofit.create(UmoriliApi.class); //Создаем объект, при помощи которого будем выполнять запросы
+//
+//        }
+        return umoriliApi;}
+
 }
