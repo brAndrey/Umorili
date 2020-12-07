@@ -1,4 +1,4 @@
-package com.example.umorili.Activity;
+package com.example.umorili.activity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,13 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.umorili.App;
+import com.example.umorili.api.App;
 import com.example.umorili.Constants;
-import com.example.umorili.PostAdapter;
-import com.example.umorili.PostModel;
+import com.example.umorili.adapter.PostAdapter;
+import com.example.umorili.model.PostModel;
 import com.example.umorili.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,23 +27,23 @@ public class RetrofitClassActivity extends AppCompatActivity {
     private static final String LOG=RetrofitClassActivity.class.getName();
 
     RecyclerView recyclerView;
-    List<PostModel> posts;
+    //List<PostModel> posts;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //setContentView(R.layout.activity_list);
 
-        posts= new ArrayList<>();
+       // posts= new ArrayList<>();
 
         recyclerView = findViewById(R.id.posts_recycle_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        PostAdapter adapter = new PostAdapter( posts );
+        PostAdapter adapter = new PostAdapter(  );
         recyclerView.setAdapter(adapter);
 
-        if ( App.getApi() == null) {Log.i(LOG," Облом ");
+        if ( App.getRequestApi() == null) {Log.i(LOG," Облом ");
 
         } else{ Log.i(LOG," not null ");}
 
@@ -56,12 +55,15 @@ public class RetrofitClassActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        App.getApi().getData(Constants.RESOURSENAME,Constants.COINT).enqueue(new Callback<List<PostModel>>() {
+        App.getRequestApi().getData(Constants.RESOURSENAME,Constants.COINT).enqueue(new Callback<List<PostModel>>() {
             @Override
             public void onResponse(Call<List<PostModel>> call, Response<List<PostModel>> response) {
-                posts.addAll(response.body());
-                recyclerView.getAdapter().notifyDataSetChanged();
-                Toast.makeText(RetrofitClassActivity.this, "No error "+posts.size(),Toast.LENGTH_SHORT).show();
+
+                adapter.setPosts(response.body());
+
+//                posts.addAll(response.body());
+//                recyclerView.getAdapter().notifyDataSetChanged();
+
             }
 
             @Override

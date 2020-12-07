@@ -1,8 +1,9 @@
-package com.example.umorili;
+package com.example.umorili.adapter;
 
 
 import android.os.Build;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.umorili.R;
+import com.example.umorili.model.PostModel;
+
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private List<PostModel> posts;
 
-    public PostAdapter(List<PostModel> posts) {
-        this.posts = posts;
-    }
+//    public PostAdapter(List<PostModel> posts) {
+//        this.posts = posts;
+//    }
 
     @NonNull
     @Override
@@ -49,6 +53,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
+    public void setPosts(List<PostModel> posts){
+        this.posts = posts;
+        notifyDataSetChanged();
+    }
+    public void updatePost(PostModel postModel){
+
+
+        Log.e("updatePost",postModel.toString());
+        //posts.set(posts.indexOf(postModel), postModel);
+        //notifyItemChanged(posts.indexOf(postModel));
+    }
+    public List<PostModel> getPosts(){
+        return posts;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

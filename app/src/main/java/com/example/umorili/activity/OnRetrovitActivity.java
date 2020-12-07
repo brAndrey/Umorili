@@ -1,19 +1,18 @@
-package com.example.umorili.Activity;
+package com.example.umorili.activity;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.umorili.Api.UmoriliApi;
+import com.example.umorili.api.UmoriliApi;
 import com.example.umorili.BuildConfig;
 import com.example.umorili.Constants;
-import com.example.umorili.PostAdapter;
-import com.example.umorili.PostModel;
+import com.example.umorili.adapter.PostAdapter;
+import com.example.umorili.model.PostModel;
 import com.example.umorili.R;
 
 import java.util.ArrayList;
@@ -30,26 +29,26 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class OnRetrovitActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<PostModel> posts;
+    //List<PostModel> posts;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        posts= new ArrayList<>();
+        //posts= new ArrayList<>();
 
         recyclerView = findViewById(R.id.posts_recycle_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        PostAdapter adapter = new PostAdapter( posts );
+        PostAdapter adapter = new PostAdapter( );
         recyclerView.setAdapter(adapter);
-
-
 
         HttpLoggingInterceptor interceptor  = new HttpLoggingInterceptor();
         interceptor.setLevel(BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.BODY);
+
+
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
@@ -74,8 +73,9 @@ public class OnRetrovitActivity extends AppCompatActivity {
                 } else {
                     Log.i("onResponse code", "  " + response.code());
                 }
-                posts.addAll(response.body());
-                recyclerView.getAdapter().notifyDataSetChanged();
+                adapter.setPosts(response.body());
+                //posts.addAll(response.body());
+                //recyclerView.getAdapter().notifyDataSetChanged();
             }
 
             @Override

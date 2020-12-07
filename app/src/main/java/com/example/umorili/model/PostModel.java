@@ -1,4 +1,4 @@
-package com.example.umorili;
+package com.example.umorili.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -89,5 +89,17 @@ public class PostModel {
      */
     public void setElementPureHtml(String elementPureHtml) {
         this.elementPureHtml = elementPureHtml;
+    }
+
+   @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n site:" + this.site);
+        sb.append("\n name:" + this.name);
+        sb.append("\n desc:" + this.desc);
+        sb.append("\n link:" + this.link);
+        sb.append("\n elementPureHtml:" + this.elementPureHtml);
+        sb.append("\n *****************");
+        return sb.toString();
     }
 }

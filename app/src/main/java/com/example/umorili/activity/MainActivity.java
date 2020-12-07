@@ -1,4 +1,4 @@
-package com.example.umorili.Activity;
+package com.example.umorili.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,11 +16,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_batton);
-
-
-
-
-
     }
 
     public void buttonClass(View view) {
@@ -31,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void buttonActivity(View view) {
         Intent intent = new Intent(this, RetrofitClassActivity.class);
+        startActivity(intent);
+    }
+
+    public void buttonObservebler(View view) {
+        Intent intent = new Intent(this,ObserverableActivity.class);
         startActivity(intent);
     }
 }
