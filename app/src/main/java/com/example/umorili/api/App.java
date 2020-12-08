@@ -47,6 +47,9 @@ public class App extends Application {
 
     public static UmoriliApi getRequestApi(){
 
+        // без занесения строки
+        //android:name=".api.App"
+        // в манифест не работает
         return umoriliApi;}
 
 }
